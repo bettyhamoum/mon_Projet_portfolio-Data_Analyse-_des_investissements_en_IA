@@ -466,23 +466,61 @@
     </div>
   </section>
  <section class="section">
+   
 <div class="section-head">
 <div class="section-tag">05 · :</div>
       <h2 class="section-title"> Les conditions de la réussite de la stratigié française en IA :</h2>
     </div>
-   La France possède déjà un écosystème important :
+ <div class="insight"> La France possède déjà un écosystème important :
 
 Environ 1 000 startups IA en 2025, contre 502 en 2021.
 Ces startups ont levé 1,4 milliard d'euros en 2024.
 La France compte 16 licornes liées à l'IA.
-
-3. Durabilité environnementale
+</div>  
+ Durabilité environnementale
 
 C'est probablement la partie la plus intéressante.
 Les centres de données français consommaient déjà entre 4 et 6 TWh d'électricité en 2023, soit 1 à 1,5 % de la consommation électrique nationale. Cette consommation a augmenté de 21 % en une seule année.
 De plus, la consommation électrique des data centers connectés au réseau de transport a doublé entre 2021 et 2025
 
+<!-- ══ ÉCOSYSTÈME FRANCE ══════════════════════════════ -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-tag">05 · Focus France</div>
+    <h2 class="section-title">L'écosystème startup IA en France</h2>
+    <p class="section-desc">La France s'impose comme le leader européen de l'IA avec une croissance remarquable de son écosystème startup.</p>
+  </div>
 
+  <!-- 3 KPI France -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Startups IA en 2025</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:var(--blue)">~1 000</div>
+      <div style="font-size:12px;color:var(--green);margin-top:6px">↑ +99% depuis 2021</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Levées de fonds 2024</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:var(--amber)">€1.4Md</div>
+      <div style="font-size:12px;color:var(--muted2);margin-top:6px">Investissement privé total</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Licornes IA françaises</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:var(--purple)">16</div>
+      <div style="font-size:12px;color:var(--muted2);margin-top:6px">Valorisation > $1Md chacune</div>
+    </div>
+  </div>
+
+  <!-- Graphique croissance startups -->
+  <div class="card">
+    <div class="card-title">Croissance des startups IA en France (2021–2025)</div>
+    <div style="height:280px"><canvas id="chartFrance" aria-label="Croissance startups IA France"></canvas></div>
+  </div>
+
+  <div class="insight" style="margin-top:16px">
+    <strong>Insight :</strong> La France a <strong>doublé</strong> son nombre de startups IA en 4 ans — passant de 502 en 2021 à ~1 000 en 2025. Avec <strong>16 licornes IA</strong> (Mistral AI, Poolside, Poolside, Contentsquare...) et le plan national <strong>€109Md</strong> annoncé en 2025, la France ambitionne de devenir le <strong>1er hub IA européen</strong>.
+  </div>
+</section>
+   
 
 
 
@@ -815,7 +853,71 @@ new Chart(document.getElementById('chartGov'), {
       }
     }
   }
+});// ── GRAPHIQUE FRANCE ─────────────────────────────────
+new Chart(document.getElementById('chartFrance'), {
+  type: 'bar',
+  data: {
+    labels: ['2021', '2022', '2023', '2024', '2025'],
+    datasets: [
+      {
+        label: 'Nombre de startups IA',
+        data: [502, 620, 750, 880, 1000],
+        backgroundColor: 'rgba(45,212,191,0.15)',
+        borderColor: '#2DD4BF',
+        borderWidth: 2,
+        borderRadius: 6,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Levées de fonds (M€)',
+        data: [680, 820, 950, 1400, null],
+        type: 'line',
+        borderColor: '#FBBF24',
+        backgroundColor: 'rgba(251,191,36,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: '#FBBF24',
+        tension: 0.4,
+        fill: true,
+        yAxisID: 'y2',
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    animation: { duration: 1000 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        labels: { color: textColor, font: { size: 12 }, boxWidth: 20, padding: 16 }
+      },
+      tooltip: {
+        backgroundColor: '#112830',
+        borderColor: '#1E3D47', borderWidth: 1,
+        titleColor: '#F0FDFA', bodyColor: '#94A3B8',
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: textColor, font: { size: 12 } },
+        grid: { color: gridColor },
+      },
+      y: {
+        position: 'left',
+        ticks: { color: '#2DD4BF', font: { size: 11 }, callback: v => v + ' startups' },
+        grid: { color: gridColor },
+      },
+      y2: {
+        position: 'right',
+        ticks: { color: '#FBBF24', font: { size: 11 }, callback: v => v + 'M€' },
+        grid: { display: false },
+      }
+    }
+  }
 });
 </script>
+
+
+   
 </body>
 </html>
