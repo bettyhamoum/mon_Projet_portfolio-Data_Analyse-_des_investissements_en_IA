@@ -507,7 +507,7 @@ De plus, la consommation électrique des data centers connectés au réseau de t
 
   <!-- Graphique croissance startups -->
   <div class="card">
-    <div class="card-title">Croissance des startups IA en France (2021–2025)</div>
+    <div class="card-title">Croissance des startups IA div>
     <div style="height:280px"><canvas id="chartFrance" aria-label="Croissance startups IA France"></canvas></div>
   </div>
 
@@ -517,7 +517,44 @@ De plus, la consommation électrique des data centers connectés au réseau de t
 </section>
    
 
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">L'impact énergétique de l'IA </h2>
+    <p class="section-desc">C'est probablement la partie la plus intéressante et la moins médiatisée.</p>
+  </div>
 
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Consommation 2023</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:var(--green)">4–6 TWh</div>
+      <div style="font-size:12px;color:var(--muted2);margin-top:6px">1 à 1,5% conso. nationale</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Hausse en 1 an</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:var(--amber)">+21%</div>
+      <div style="font-size:12px;color:var(--muted2);margin-top:6px">Croissance 2022 → 2023</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px">Évolution 2021–2025</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:var(--red)">×2</div>
+      <div style="font-size:12px;color:var(--muted2);margin-top:6px">Conso. data centers réseau transport</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Consommation électrique des data centers en France (TWh)</div>
+    <div style="height:280px"><canvas id="chartEnergy"></canvas></div>
+  </div>
+
+  <div class="insight" style="border-left-color:var(--green);margin-top:16px">
+    <strong>⚡ Contexte :</strong> Les centres de données français consommaient entre
+    <strong>4 et 6 TWh</strong> d'électricité en 2023, soit <strong>1 à 1,5%</strong>
+    de la consommation électrique nationale. Cette consommation a bondi de
+    <strong>+21% en une seule année</strong>. Entre 2021 et 2025, la consommation
+    des data centers connectés au réseau de transport a <strong>doublé</strong> —
+    un signal fort sur le coût environnemental réel de l'essor de l'IA.
+  </div>
+</section>
 
 
 
@@ -811,7 +848,42 @@ new Chart(document.getElementById('chartSector'), {
     }
   }
 });
-
+new Chart(document.getElementById('chartEnergy'), {
+  type: 'line',
+  data: {
+    labels: ['2019','2020','2021','2022','2023','2024','2025'],
+    datasets: [{
+      label: 'Consommation (TWh)',
+      data: [2.8, 3.1, 3.4, 4.1, 5.0, 5.8, 6.8],
+      borderColor: '#34D399',
+      backgroundColor: 'rgba(52,211,153,0.1)',
+      fill: true,
+      tension: 0.4,
+      pointRadius: 5,
+      pointBackgroundColor: '#34D399',
+      borderWidth: 2.5,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: textColor, font: { size: 12 } } },
+      tooltip: {
+        backgroundColor: '#112830',
+        borderColor: '#1E3D47', borderWidth: 1,
+        titleColor: '#F0FDFA', bodyColor: '#94A3B8',
+        callbacks: { label: ctx => ` ${ctx.parsed.y} TWh` }
+      }
+    },
+    scales: {
+      x: { ticks: { color: textColor }, grid: { color: gridColor } },
+      y: {
+        ticks: { color: textColor, callback: v => v + ' TWh' },
+        grid: { color: gridColor }
+      }
+    }
+  }
+});
 // ── GRAPHIQUE 3 : GOUVERNEMENTS ──────────────────────────
 new Chart(document.getElementById('chartGov'), {
   type: 'bar',
