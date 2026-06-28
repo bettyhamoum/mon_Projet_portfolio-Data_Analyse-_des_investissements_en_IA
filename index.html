@@ -513,7 +513,29 @@
   </div>
 </section>
 
-
+<section class="section">
+  <div class="section-head">
+    <div class="section-tag">07 · Prédiction</div>
+    <h2 class="section-title">Consommation énergétique des data centers — Projection 2025–2075</h2>
+    <p class="section-desc">Projection basée sur le taux de croissance réel observé entre 2019 et 2025, sans hypothèse d'optimisation.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">TWh consommés · Données réelles + Projection tendancielle (+16%/an)</div>
+    <div style="height:380px"><canvas id="chartPrediction"></canvas></div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:10px;padding:20px 24px;margin-top:16px">
+    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:8px">PROJECTION TENDANCIELLE · +16%/an</div>
+    <div style="font-size:13px;color:var(--muted2);line-height:1.7">
+      Basée sur le taux de croissance annuel moyen observé entre 2019 et 2025.
+      Aucune hypothèse d'optimisation — uniquement la trajectoire actuelle si rien ne change.
+    </div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--amber);margin-top:12px">~180 TWh en 2075</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px">Soit 26x la consommation actuelle des data centers français</div>
+  </div>
+  <div class="insight" style="border-left-color:var(--amber);margin-top:16px">
+    <strong> Méthode :</strong> Régression exponentielle sur les données réelles 2019–2025 (TCAM observé : +16%/an). Projection indicative sans hypothèse d'optimisation technologique ni de régulation.
+  </div>
+</section>
 
 
 
@@ -896,8 +918,89 @@ new Chart(document.getElementById('chartFrance'), {
     }
   }
 });
+(function() {
+  const dataReelle = [2.8, 3.1, 3.4, 4.1, 5.0, 5.8, 6.8];
+  const annees = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
+  const anneesFutures = [];
+  for (let y = 2026; y <= 2075; y++) anneesFutures.push(y);
+
+  function projet(base, taux, n) {
+    const res = [];
+    for (let i = 1; i <= n; i++) res.push(+(base * Math.pow(1 + taux, i)).toFixed(2));
+    return res;
+  }
+
+  const tendanciel = projet(6.8, 0.16, 50);
+  const allLabels = [...annees, ...anneesFutures];
+  const reel = [...dataReelle, ...new Array(50).fill(null)];
+  const proj = [...new Array(dataReelle.length - 1).fill(null), 6.8, ...tendanciel];
+
+  new Chart(document.getElementById('chartPrediction'), {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          label: 'Données réelles',
+          data: reel,
+          borderColor: '#F0FDFA',
+          borderWidth: 3,
+          pointRadius: 5,
+          pointBackgroundColor: '#F0FDFA',
+          tension: 0.4,
+          fill: false,
+        },
+        {
+          label: 'Projection tendancielle (+16%/an)',
+          data: proj,
+          borderColor: '#FBBF24',
+          backgroundColor: 'rgba(251,191,36,0.07)',
+          borderWidth: 2.5,
+          borderDash: [6, 3],
+          pointRadius: 0,
+          tension: 0.4,
+          fill: true,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: { duration: 1200 },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: { color: textColor, font: { size: 12 }, boxWidth: 24, padding: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#112830',
+          borderColor: '#1E3D47', borderWidth: 1,
+          titleColor: '#F0FDFA', bodyColor: '#94A3B8',
+          callbacks: {
+            label: ctx => ctx.parsed.y !== null ? ` ${ctx.dataset.label} : ${ctx.parsed.y} TWh` : ''
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColor, font: { size: 10 }, maxRotation: 45,
+            callback: (val, i) => allLabels[i] % 5 === 0 ? allLabels[i] : ''
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          ticks: { color: textColor, callback: v => v + ' TWh' },
+          grid: { color: gridColor }
+        }
+      }
+    }
+  });
+})();
+
+  
 </script>
 
+ 
 
    
 </body>
