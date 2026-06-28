@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -932,7 +944,7 @@ new Chart(document.getElementById('chartFrance'), {
 
   const tendanciel = projet(6.8, 0.16, 50);
   const allLabels = [...annees, ...anneesFutures];
-  const reel = [...dataReelle, ...new Array(50).fill(null)];
+  const reel = [...dataReelle, ...new Array(25).fill(null)];
   const proj = [...new Array(dataReelle.length - 1).fill(null), 6.8, ...tendanciel];
 
   new Chart(document.getElementById('chartPrediction'), {
