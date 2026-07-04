@@ -605,6 +605,7 @@
     <div style="font-size:12px;color:var(--muted);margin-top:4px">9x la consommation actuelle · économie de 120 TWh</div>
   </div>
 </div>
+ <div style="height:380px"><canvas id="chartPredictionoptimization"></canvas></div>
 </section>
 
 
@@ -1086,7 +1087,7 @@ new Chart(document.getElementById('chartFrance'), {
   const proj = [...new Array(dataReelle.length - 1).fill(null), 6.8, ...tendanciel];
   const opt  = [...new Array(dataReelle.length - 1).fill(null), 6.8, ...optimise];
 
-  new Chart(document.getElementById('chartPrediction'), {
+  new Chart(document.getElementById('chartPredictionoptimization'), {
     type: 'line',
     data: {
       labels: allLabels,
