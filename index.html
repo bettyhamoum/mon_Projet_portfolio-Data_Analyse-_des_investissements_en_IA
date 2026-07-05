@@ -1093,8 +1093,8 @@ new Chart(document.getElementById('chartFrance'), {
     return res;
   }
 
-  const tendanciel = projet(6.8, 0.16, 50);
-  const optimise   = projet(6.8, 0.12, 50);
+  const tendanciel = projet(6.8, 0.16, 25);
+  const optimise   = projet(6.8, 0.12, 25);
   const allLabels  = [...annees, ...anneesFutures];
   const reel = [...dataReelle, ...new Array(50).fill(null)];
   const proj = [...new Array(dataReelle.length - 1).fill(null), 6.8, ...tendanciel];
@@ -1115,19 +1115,9 @@ new Chart(document.getElementById('chartFrance'), {
           tension: 0.4,
           fill: false,
         },
+        
         {
-          label: 'Sans optimisation (+16%/an)',
-          data: proj,
-          borderColor: '#F87171',
-          backgroundColor: 'rgba(248,113,113,0.06)',
-          borderWidth: 2.5,
-          borderDash: [6, 3],
-          pointRadius: 0,
-          tension: 0.4,
-          fill: true,
-        },
-        {
-          label: 'Avec optimisation PUE + Puces + Free cooling + Loi REEN (+12%/an)',
+          label: 'Avec optimisation PUE + Puces + Free cooling + Loi REEN ',
           data: opt,
           borderColor: '#34D399',
           backgroundColor: 'rgba(52,211,153,0.06)',
