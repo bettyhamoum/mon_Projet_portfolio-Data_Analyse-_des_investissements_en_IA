@@ -262,6 +262,60 @@
     .hero { padding: 48px 20px 40px; }
     .main { padding: 0 16px 60px; }
   }
+  @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+
+  .hero {
+    background: #0D1B2A !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .card {
+    background: #f8f8f8 !important;
+    border: 1px solid #ddd !important;
+    break-inside: avoid;
+  }
+
+  .kpi {
+    background: #f0f0f0 !important;
+    break-inside: avoid;
+  }
+
+  .kpi-value.blue   { color: #1a56db !important; }
+  .kpi-value.green  { color: #057a55 !important; }
+  .kpi-value.amber  { color: #c27803 !important; }
+  .kpi-value.purple { color: #6c2bd9 !important; }
+
+  .insight {
+    background: #f0f4ff !important;
+    border-left: 3px solid #1a56db !important;
+    color: #1a1a1a !important;
+  }
+
+  .section-tag { color: #1a56db !important; }
+
+  .hero h1 { color: #ffffff !important; }
+  .hero-sub { color: #cbd5e1 !important; }
+
+  canvas {
+    max-width: 100% !important;
+  }
+
+  .footer {
+    border-top: 1px solid #ddd !important;
+    color: #555 !important;
+  }
+
+  a { color: #1a56db !important; }
+}
 </style>
 </head>
 <body>
