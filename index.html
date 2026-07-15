@@ -48,6 +48,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -262,6 +263,24 @@
     .hero { padding: 48px 20px 40px; }
     .main { padding: 0 16px 60px; }
   }
+  @media print {
+  .hero {
+    background: #0B1F26 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .hero h1,
+  .hero h1 span,
+  .hero-label,
+  .hero-sub,
+  .hero-meta,
+  .hero-meta span {
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
   @media print {
   * {
     -webkit-print-color-adjust: exact !important;
